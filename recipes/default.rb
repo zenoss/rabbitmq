@@ -38,7 +38,7 @@ template "/etc/rabbitmq/rabbitmq-env.conf" do
   notifies :restart, "service[rabbitmq-server]"
 end
 
-case node[:platform]
+case node['platform']
 when "debian", "ubuntu"
   # use the RabbitMQ repository instead of Ubuntu or Debian's
   # because there are very useful features in the newer versions
@@ -60,7 +60,7 @@ when "redhat", "centos", "scientific"
   end
 end
 
-if node[:rabbitmq][:cluster]
+if node['rabbitmq']['cluster']
     # If this already exists, don't do anything
     # Changing the cookie will stil have to be a manual process
     template "/var/lib/rabbitmq/.erlang.cookie" do
